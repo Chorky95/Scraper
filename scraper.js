@@ -1,14 +1,23 @@
 const puppeteer = require('puppeteer');
 
 (async function scrape() {
-    const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch({ 
+		headless: false,
+		defaultViewport: null
+	});
 
     const page = await browser.newPage();
     await page.goto('https://lunch.hr/');
 
-	await page.waitForSelector('h1');
-
     let foodTitles = await page.evaluate(() => {
+
+		//let dateButton = document.querySelectorAll('svg[class^="CalendarButton-module"]')[1];
+
+		function removeDuplicates(arr) {
+			return arr.filter((item,
+				index) => arr.indexOf(item) === index);
+		}
+
 		function getTitles() {
 			let buttons = document.querySelectorAll('div[class^="LunchButton-module"]');
 			let foodTitles = [];
@@ -22,15 +31,18 @@ const puppeteer = require('puppeteer');
 					} else {
 						return;
 					}
-				})
+				});
+
 				let filteredTitles = titles.filter((title) => {
 					if(title) {
 						return title;
 					}					
 				});
+				
 				foodTitles.push(...filteredTitles);
 			});
-			return foodTitles;
+
+			return removeDuplicates(foodTitles);
 		}
 	  	return getTitles();
     });
