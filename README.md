@@ -5,4 +5,4 @@ First:
 npm install
 
 To run:
-node scraper.js 
+node src

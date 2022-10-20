@@ -1,6 +1,12 @@
 const puppeteer = require('puppeteer');
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const helmet = require('helmet');
+const morgan = require('morgan');
 
-(async function scrape() {
+
+let data = (async function scrape() {
     const browser = await puppeteer.launch({ 
 		headless: false,
 		defaultViewport: null
@@ -94,7 +100,7 @@ const puppeteer = require('puppeteer');
 			for (let i = 0; i < menus.length; i++) {
 				menuItems = {
 					menu: menus[i],
-					title: filteredTitles[i],
+					title: foodTitles[i],
 					image: images[i]
 				}
 
@@ -124,6 +130,39 @@ const puppeteer = require('puppeteer');
     });
 
     // logging 
-    console.log(data);
  	await browser.close();
+
+	return data;
 })();
+
+data.then((value) => {
+	
+	// defining the Express app
+	const app = express();
+	// defining an array to work as the database (temporary solution)
+	// const ads = [
+	//   {title: 'Hello, world (again)!'}
+	// ];
+
+	// adding Helmet to enhance your Rest API's security
+	app.use(helmet());
+
+	// using bodyParser to parse JSON bodies into JS objects
+	app.use(bodyParser.json());
+
+	// enabling CORS for all requests
+	app.use(cors());
+
+	// adding morgan to log HTTP requests
+	app.use(morgan('combined'));
+
+	// defining an endpoint to return all ads
+	app.get('/', (req, res) => {
+	res.send(value);
+	});
+
+	// starting the server
+	app.listen(3001, () => {
+	console.log('listening on port 3001');
+	});
+});
