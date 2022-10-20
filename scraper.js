@@ -9,16 +9,44 @@ const puppeteer = require('puppeteer');
     const page = await browser.newPage();
     await page.goto('https://lunch.hr/');
 
-    let foodTitles = await page.evaluate(() => {
+    let data = await page.evaluate(() => {
+		
+		// WIP
+		let today = new Date();
 
-		//let dateButton = document.querySelectorAll('svg[class^="CalendarButton-module"]')[1];
+		function getNextWorkDay(date) {
+			let day = date.getDay(), add = 1;
+			if (day === 5) add = 3;
+			else if (day === 6) add = 2;
+			date.setDate(date.getDate() + add);
+			 
+			return date;
+		};	
+		
+		function formatDate(date) {
+			let dd = String(date.getDate()).padStart(2, '0');
+			let mm = String(date.getMonth() + 1).padStart(2, '0');
+			let yyyy = date.getFullYear();
+
+			return dd + '.' + mm + '.' + yyyy + '.';
+		}
+
+		let data = [];
+
+		let dateButton = document.body.querySelectorAll('svg[class^="CalendarButton-module"]')[1];
+
+		dateButton.addEventListener('click', e => {
+			console.log('clicked body');
+		});
+
+		let clickEvent = new Event('click', { bubbles: true, cancelable: false});
 
 		function removeDuplicates(arr) {
 			return arr.filter((item,
 				index) => arr.indexOf(item) === index);
 		}
 
-		function getTitles() {
+		function getFoodNames() {
 			let buttons = document.querySelectorAll('div[class^="LunchButton-module"]');
 			let foodTitles = [];
 			
@@ -27,7 +55,7 @@ const puppeteer = require('puppeteer');
 				let titlesElement = document.body.querySelectorAll('h1');
 				let titles = Object.values(titlesElement).map(title => {
 					if(title.parentElement.className.includes('DailyLunchHero-module')) {
-						return title.innerHTML;
+						return title.innerHTML.replaceAll(/amp;/gi,'');
 					} else {
 						return;
 					}
@@ -43,11 +71,28 @@ const puppeteer = require('puppeteer');
 			});
 
 			return removeDuplicates(foodTitles);
+		};
+
+		for (let i = 0; i <= 5; i++) {
+
+			let dailyData = {
+				date: formatDate(today),
+				foods: getFoodNames()
+			}
+
+			data.push(dailyData);
+
+			if(i < 5) {
+				dateButton.dispatchEvent(clickEvent);
+			}
+
+			getNextWorkDay(today);
 		}
-	  	return getTitles();
+
+	  	return data;
     });
 
     // logging 
-    console.log(foodTitles);
+    console.log(data);
   	await browser.close();
 })();
