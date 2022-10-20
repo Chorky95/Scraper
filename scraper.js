@@ -28,7 +28,7 @@ const puppeteer = require('puppeteer');
 						return title;
 					}					
 				});
-				foodTitles.push(filteredTitles);
+				foodTitles.push(...filteredTitles);
 			});
 			return foodTitles;
 		}
@@ -37,5 +37,5 @@ const puppeteer = require('puppeteer');
 
     // logging 
     console.log(foodTitles);
-    await browser.close();
+  	await browser.close();
 })();
