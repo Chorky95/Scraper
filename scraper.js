@@ -50,7 +50,6 @@ const puppeteer = require('puppeteer');
 			let images = [];
 			let menuItems = {};
 			let menus = ['A', 'B', 'C', 'D', 'E'];
-			let counter = 0;
 			let allMenus = [];
 
 			buttons.forEach(button => {
