@@ -158,11 +158,11 @@ data.then((value) => {
 
 	// defining an endpoint to return all ads
 	app.get('/', (req, res) => {
-	res.send(value);
+		res.send(value);
 	});
 
 	// starting the server
-	app.listen(3001, () => {
-	console.log('listening on port 3001');
+	app.listen(3000, () => {
+	console.log('listening on port 3000');
 	});
 });
