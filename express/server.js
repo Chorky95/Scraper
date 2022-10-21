@@ -5,10 +5,9 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 
-
 let data = (async function scrape() {
     const browser = await puppeteer.launch({ 
-		headless: false,
+		headless: true,
 		defaultViewport: null
 	});
 
@@ -139,10 +138,6 @@ data.then((value) => {
 	
 	// defining the Express app
 	const app = express();
-	// defining an array to work as the database (temporary solution)
-	// const ads = [
-	//   {title: 'Hello, world (again)!'}
-	// ];
 
 	// adding Helmet to enhance your Rest API's security
 	app.use(helmet());
@@ -156,13 +151,25 @@ data.then((value) => {
 	// adding morgan to log HTTP requests
 	app.use(morgan('combined'));
 
-	// defining an endpoint to return all ads
+	// defining an endpoint to return data
 	app.get('/', (req, res) => {
 		res.send(value);
 	});
 
-	// starting the server
-	app.listen(3000, () => {
-	console.log('listening on port 3000');
-	});
+	// write to json file
+	const fs = require('fs');
+	const jsonContent = JSON.stringify(value);
+
+	fs.writeFile("./data.json", jsonContent, 'utf8', function (err) {
+		if (err) {
+			return console.log(err);
+		}
+
+    console.log("The file was saved!");
+}); 
+
+	//Starting the local server
+	// app.listen(3001, () => {
+	// 	console.log('listening on port 3001');
+	// });
 });

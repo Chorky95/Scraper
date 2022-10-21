@@ -1,16 +1,15 @@
 {
   "dependencies": {
+    "@netlify/functions": "^1.3.0",
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "helmet": "^6.0.0",
     "morgan": "^1.10.0",
-    "netlify-lambda": "^2.0.15",
-    "puppeteer": "^19.0.0",
-    "serverless-http": "^3.1.0"
+    "node-fetch": "^3.2.10",
+    "puppeteer": "^19.0.0"
   },
   "scripts": {
-    "start": "node_modules/.bin/netlify-lambda serve src",
-    "build": "node_modules/.bin/netlify-lambda build src"
-    }
+    "build": "node express/server.js"
+  }
 }
