@@ -11,6 +11,6 @@
     "puppeteer-core": "^19.1.0"
   },
   "scripts": {
-    "build": "cd ./node_modules/puppeteer npm run install cd ../../ node express/server.js"
+    "build": "cd ./node_modules/puppeteer npm run install && cd ../../ node express/server.js"
   }
 }
