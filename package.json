@@ -11,7 +11,7 @@
     "puppeteer-core": "^19.1.0"
   },
   "scripts": {
-    "prepare": "npm cache clean --force && npm install",
+    "prepare": "npm cache clean && npm install",
     "scrape" : "node express/server.js",
     "build": "npm run prepare && npm run scrape"
   }
