@@ -21,3 +21,5 @@ const handler = schedule('29 12 * * *', async () => {
 export {
   handler
 }
+
+//cd ./node_modules/puppeteer npm run install cd ../../
