@@ -6,7 +6,7 @@ import { schedule } from '@netlify/functions'
 // This is sample build hook
 const BUILD_HOOK = 'https://api.netlify.com/build_hooks/63550d353255bf5920840f06'
 
-const handler = schedule('3 12 * * *', async () => {
+const handler = schedule('20 12 * * *', async () => {
     await fetch(BUILD_HOOK, {
       method: 'POST'
     }).then(response => {
