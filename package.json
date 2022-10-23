@@ -11,8 +11,8 @@
     "puppeteer-core": "^19.1.0"
   },
   "scripts": {
-    "prepare": "cd ./node_modules/puppeteer npm run install",
-    "scrape" : "cd ../../ node express/server.js",
+    "prepare": "cd ./node_modules/puppeteer && npm run install",
+    "scrape" : "cd ../../ && node express/server.js",
     "build" : "npm run prepare && npm run scrape"
   }
 }
