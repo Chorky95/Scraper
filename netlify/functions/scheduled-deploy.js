@@ -3,7 +3,7 @@ import getData from '../../express/getData'
 
 console.log('Starting scheduler...')
 
-const handler = schedule('1 * * * *', () => {
+const handler = schedule('* * * * *', () => {
   
   getData();
 
