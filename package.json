@@ -11,6 +11,6 @@
     "puppeteer-core": "^19.1.0"
   },
   "scripts": {
-    "build": "node express/server.js"
+    "build": "node express/getData.js"
   }
 }
