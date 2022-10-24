@@ -1,25 +1,37 @@
-//https://api.netlify.com/build_hooks/63528ae9386d020f6e1d349b
-
-import fetch from 'node-fetch'
 import { schedule } from '@netlify/functions'
+import getData from '../../express/getData'
 
-// This is sample build hook
-const BUILD_HOOK = 'https://api.netlify.com/build_hooks/63550d353255bf5920840f06'
+console.log('Starting scheduler...')
 
-const handler = schedule('0 7 * * 1-6', async () => {
-    await fetch(BUILD_HOOK, {
-      method: 'POST'
-    }).then(response => {
-      console.log('Build hook response:', response)
-    })
+const handler = schedule('1 * * * *', () => {
   
-    return {
-      statusCode: 200
-    }
-  })
+  getData();
+
+  return {
+    statusCode: 200
+  }
+})
 
 export {
   handler
 }
+
+
+// const handler = schedule('0 7 * * 1-6', async () => {
+//     console.log('Restarting build...')
+//     await fetch(BUILD_HOOK, {
+//       method: 'POST'
+//     }).then(response => {
+//       console.log('Build hook response:', response)
+//     })
+  
+//     return {
+//       statusCode: 200
+//     }
+//   })
+
+// export {
+//   handler
+// }
 
 //cd ./node_modules/puppeteer npm run install cd ../../
