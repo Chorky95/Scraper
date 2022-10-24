@@ -1,11 +1,12 @@
+const puppeteer = require('puppeteer');
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const helmet = require('helmet');
+const morgan = require('morgan');
+
 export default function getData() {
 
-	const puppeteer = require('puppeteer');
-	const express = require('express');
-	const bodyParser = require('body-parser');
-	const cors = require('cors');
-	const helmet = require('helmet');
-	const morgan = require('morgan');
 
 	let data = (async function scrape() {
 		const browser = await puppeteer.launch({ 
