@@ -1,35 +1,20 @@
-const { schedule } = require('@netlify/functions');
+import { schedule } from '@netlify/functions'
+import getData from '../../express/getData'
 
-const handler = async function(event, context) {
-    console.log("Received event:", event);
+console.log('Starting scheduler...')
 
-    return {
-        statusCode: 200,
-    };
-};
+const handler = schedule('* * * * *', () => {
+  console.log('4546');
+  getData();
 
-exports.handler = schedule("* * * * *", handler);
+  return {
+    statusCode: 200
+  }
+})
 
-
-
-
-// import { schedule } from '@netlify/functions'
-// import getData from '../../express/getData'
-
-// console.log('Starting scheduler...')
-
-// const handler = schedule('* * * * *', () => {
-//   console.log('4546');
-//   getData();
-
-//   return {
-//     statusCode: 200
-//   }
-// })
-
-// export {
-//   handler
-// }
+export {
+  handler
+}
 
 
 // const handler = schedule('0 7 * * 1-6', async () => {
