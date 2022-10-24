@@ -12,6 +12,6 @@
   },
   "type": "module",
   "scripts": {
-    "build": "node node_modules/puppeteer/install.js"
+    "build": "node express/server.js"
   }
 }
