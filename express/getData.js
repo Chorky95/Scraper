@@ -164,7 +164,7 @@ export default function getData() {
 		// const fs = require('fs');
 		const jsonContent = JSON.stringify(value);
 
-		fs.writeFile("./data.json", jsonContent, 'utf8', function (err) {
+		fs.writeFile("./menus.json", jsonContent, 'utf8', function (err) {
 			if (err) {
 				return console.log(err);
 			}
