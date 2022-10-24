@@ -10,7 +10,8 @@
     "puppeteer": "^19.1.0",
     "puppeteer-core": "^19.1.0"
   },
+  "type": "module",
   "scripts": {
-    "build": "node express/getData.js"
+    "build": "node express/server.js"
   }
 }
