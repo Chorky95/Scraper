@@ -4,7 +4,7 @@ import getData from '../../express/getData'
 console.log('Starting scheduler...')
 
 const handler = schedule('* * * * *', () => {
-  
+  console.log('4546');
   getData();
 
   return {
