@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import * as fs from 'fs';
 
 export default function getData() {
 
@@ -160,7 +161,7 @@ export default function getData() {
 		});
 
 		// write to json file
-		const fs = require('fs');
+		// const fs = require('fs');
 		const jsonContent = JSON.stringify(value);
 
 		fs.writeFile("./data.json", jsonContent, 'utf8', function (err) {
@@ -168,8 +169,8 @@ export default function getData() {
 				return console.log(err);
 			}
 
-		console.log("The file was saved!");
-	}); 
+			console.log("The file was saved!");
+		}); 
 
 		//Starting the local server
 		// app.listen(3001, () => {
