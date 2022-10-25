@@ -1,10 +1,11 @@
+import puppeteer from 'puppeteer-core';
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import * as fs from 'fs';
-import chromium from 'chrome-aws-lambda';
+import chromium from '@sparticuz/chromium';
 
 export default function getData() {
 
@@ -12,10 +13,12 @@ export default function getData() {
 	let data = (async function scrape() {
 		console.log('test');
 
-		const browser = await chromium.puppeteer.launch({ 
-			headless: true,
+		const browser = await puppeteer.launch({ 
+			args: chromium.args,
+			defaultViewport: chromium.defaultViewport,
 			executablePath: await chromium.executablePath,
-			defaultViewport: null
+			headless: chromium.headless,
+			ignoreHTTPSErrors: true,
 		});
 
 		const page = await browser.newPage();
