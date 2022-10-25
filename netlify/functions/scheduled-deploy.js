@@ -1,19 +1,12 @@
 import { schedule } from '@netlify/functions'
-// import { response } from 'express';
-// import getData from '../../express/getData'
+import getData from '../../express/getData'
 
 console.log('Starting scheduler...')
 
-const handler = schedule('* * * * *', async () => {
+const handler = schedule('* * * * *', () => {
   console.log('4546');
   
-  await fetch('express/server.js', {
-    method: 'POST'
-  }).then(response => {
-    console.log('Done:', response)
-  });
-
-  console.log('hwerhwsdh');
+  getData();
 
   return {
     statusCode: 200
