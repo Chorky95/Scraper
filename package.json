@@ -7,7 +7,6 @@
     "helmet": "^6.0.0",
     "morgan": "^1.10.0",
     "node-fetch": "^3.2.10",
-    "npm": "^8.19.2",
     "puppeteer": "^19.1.0",
     "puppeteer-core": "^19.1.0"
   },
