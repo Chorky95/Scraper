@@ -1,21 +1,22 @@
-import puppeteer from 'puppeteer';
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import * as fs from 'fs';
+import chromium from 'chrome-aws-lambda';
 
 export default function getData() {
 
 
 	let data = (async function scrape() {
-		console.log('test');
+		console.log('asdasd');
 
-		const browser = await puppeteer.launch({ 
-			headless: true,
-			executablePath: '/opt/buildhome/.cache/puppeteer/chrome/linux-1045629/',
-			defaultViewport: null
+		const browser = await chromium.puppeteer.launch({ 
+			executablePath: await chromium.executablePath,
+			args: chromium.args,
+			defaultViewport: chromium.defaultViewport,
+			headless: chromium.headless,
 		});
 
 		const page = await browser.newPage();
