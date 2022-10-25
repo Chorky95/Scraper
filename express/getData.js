@@ -10,13 +10,12 @@ export default function getData() {
 
 
 	let data = (async function scrape() {
-		console.log('asdasd');
+		console.log('test');
 
 		const browser = await chromium.puppeteer.launch({ 
+			headless: true,
 			executablePath: await chromium.executablePath,
-			args: chromium.args,
-			defaultViewport: chromium.defaultViewport,
-			headless: chromium.headless,
+			defaultViewport: null
 		});
 
 		const page = await browser.newPage();
