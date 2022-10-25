@@ -13,9 +13,11 @@ export default function getData() {
 		console.log('test');
 
 		const browser = await chromium.puppeteer.launch({ 
-			headless: true,
+			args: chromium.args,
+			defaultViewport: chromium.defaultViewport,
 			executablePath: await chromium.executablePath,
-			defaultViewport: null
+			headless: chromium.headless,
+			ignoreHTTPSErrors: true,
 		});
 
 		const page = await browser.newPage();
