@@ -1,12 +1,13 @@
 import { schedule } from '@netlify/functions'
+import npm from 'npm';
 import getData from '../../express/getData'
 
 console.log('Starting scheduler...')
 
 const handler = schedule('* * * * *', () => {
   console.log('4546');
-  getData();
-
+  npm.commands['run-script']('node express/server.js');
+  console.log('asggasga');
   return {
     statusCode: 200
   }
