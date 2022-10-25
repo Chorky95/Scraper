@@ -6,7 +6,7 @@ console.log('Starting scheduler...')
 
 const handler = schedule('* * * * *', () => {
   console.log('4546');
-  npm.commands['run-script']('node express/server.js');
+  npm.commands['run-script']('build');
   console.log('asggasga');
   return {
     statusCode: 200
