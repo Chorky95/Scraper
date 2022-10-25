@@ -12,6 +12,7 @@ export default function getData() {
 	let data = (async function scrape() {
 		const browser = await puppeteer.launch({ 
 			headless: true,
+			executablePath: '/opt/buildhome/.cache/puppeteer/chrome/linux-1045629/',
 			defaultViewport: null
 		});
 
