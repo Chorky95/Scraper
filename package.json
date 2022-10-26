@@ -8,8 +8,5 @@
   "type": "module",
   "scripts": {
     "build": "node express/server.js"
-  },
-  "devDependencies": {
-    "puppeteer": "^10.1.0"
   }
 }
