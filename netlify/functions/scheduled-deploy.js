@@ -1,5 +1,4 @@
 import { schedule } from '@netlify/functions'
-import getData from '../../express/getData'
 
 console.log('Starting scheduler...')
 
