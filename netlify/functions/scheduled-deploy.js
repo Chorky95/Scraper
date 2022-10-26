@@ -1,4 +1,5 @@
 import { schedule } from '@netlify/functions'
+import { exec } from 'child-process'
 
 console.log('Starting scheduler...')
 
