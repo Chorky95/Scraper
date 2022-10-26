@@ -12,7 +12,7 @@
   },
   "type": "module",
   "scripts": {
-    "build": "npm install"
+    "build": "node express/server.js"
   },
   "devDependencies": {
     "puppeteer": "^19.1.2"
