@@ -2,8 +2,6 @@ import * as fs from 'fs';
 import chromium from 'chrome-aws-lambda';
 
 export default function getData() {
-
-
 	let data = (async function scrape() {
 		console.log('test');
 
@@ -13,6 +11,8 @@ export default function getData() {
 			executablePath: await chromium.executablePath,
 			headless: true,
 			ignoreHTTPSErrors: true,
+			ignoreDefaultArgs: ['--disable-extensions']
+
 		});
 
 		const page = await browser.newPage();
