@@ -8,7 +8,7 @@ export default function getData() {
 		const browser = await chromium.puppeteer.launch({ 
 			args: ['--no-sandbox', "--disabled-setupid-sandbox"],
 			defaultViewport: null,
-			// executablePath: await chromium.executablePath,
+			executablePath: await chromium.executablePath,
 			headless: true,
 			ignoreHTTPSErrors: true,
 			ignoreDefaultArgs: ['--disable-extensions']
