@@ -1,20 +1,16 @@
 import { schedule } from '@netlify/functions'
-import { exec } from 'node:child_process'
+import getData from '../../express/getData'
 
 console.log('Starting scheduler...')
 
-const handler = schedule('* * * * *', () => {
-  exec("node express/server.js", (error, stdout, stderr) => {
-      if (error) {
-          console.log(`error: ${error.message}`);
-          return;
-      }
-      if (stderr) {
-          console.log(`stderr: ${stderr}`);
-          return;
-      }
-      console.log(`stdout: ${stdout}`);
-  });
+const handler = schedule('* 7 * * 1-6', () => {
+  console.log('4546');
+  
+  getData();
+
+  return {
+    statusCode: 200
+  }
 })
 
 export {
