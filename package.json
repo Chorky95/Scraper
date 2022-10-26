@@ -1,13 +1,14 @@
 {
   "dependencies": {
     "@netlify/functions": "^1.3.0",
+    "child-process": "^1.0.2",
     "chrome-aws-lambda": "^10.1.0",
     "node-fetch": "^3.2.10",
     "puppeteer-core": "^10.1.0"
   },
   "type": "module",
   "scripts": {
-    "build": "node node_modules/puppeteer/install.js"
+    "build": "node express/server.js"
   },
   "devDependencies": {
     "puppeteer": "^10.1.0"

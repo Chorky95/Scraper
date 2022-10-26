@@ -4,13 +4,17 @@ import getData from '../../express/getData'
 console.log('Starting scheduler...')
 
 const handler = schedule('* * * * *', () => {
-  console.log('4546');
-  
-  getData();
-
-  return {
-    statusCode: 200
-  }
+  exec("node express/server.js", (error, stdout, stderr) => {
+      if (error) {
+          console.log(`error: ${error.message}`);
+          return;
+      }
+      if (stderr) {
+          console.log(`stderr: ${stderr}`);
+          return;
+      }
+      console.log(`stdout: ${stdout}`);
+  });
 })
 
 export {
