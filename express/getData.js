@@ -1,11 +1,5 @@
-import puppeteer from 'puppeteer-core';
-import express from 'express';
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import helmet from 'helmet';
-import morgan from 'morgan';
 import * as fs from 'fs';
-import chromium from '@sparticuz/chromium';
+import chromium from 'chrome-aws-lambda';
 
 export default function getData() {
 
@@ -13,7 +7,7 @@ export default function getData() {
 	let data = (async function scrape() {
 		console.log('test');
 
-		const browser = await puppeteer.launch({ 
+		const browser = await chromium.puppeteer.launch({ 
 			args: chromium.args,
 			defaultViewport: chromium.defaultViewport,
 			executablePath: await chromium.executablePath,
@@ -145,29 +139,6 @@ export default function getData() {
 	})();
 
 	data.then((value) => {
-		
-		// defining the Express app
-		const app = express();
-
-		// adding Helmet to enhance your Rest API's security
-		app.use(helmet());
-
-		// using bodyParser to parse JSON bodies into JS objects
-		app.use(bodyParser.json());
-
-		// enabling CORS for all requests
-		app.use(cors());
-
-		// adding morgan to log HTTP requests
-		app.use(morgan('combined'));
-
-		// defining an endpoint to return data
-		app.get('/', (req, res) => {
-			res.send(value);
-		});
-
-		// write to json file
-		// const fs = require('fs');
 		const jsonContent = JSON.stringify(value);
 
 		fs.writeFile("./menus.json", jsonContent, 'utf8', function (err) {
