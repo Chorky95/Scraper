@@ -1,9 +1,9 @@
-import * as fs from 'fs';
-import chromium from 'chrome-aws-lambda';
+const fs = require('fs');
+const chromium = require('chrome-aws-lambda');
 
-export default function getData() {
+function getData() {
 	let data = (async function scrape() {
-		console.log('test');
+		console.log('Getting menus...');
 
 		const browser = await chromium.puppeteer.launch({ 
 			args: ['--no-sandbox', "--disabled-setupid-sandbox"],
@@ -128,12 +128,14 @@ export default function getData() {
 
 				getNextWorkDay(today);
 			}
-
+			//console.log(data);
+			
 			return data;
 		});
 
 		// logging 
 		await browser.close();
+		
 
 		return data;
 	})();
@@ -141,18 +143,15 @@ export default function getData() {
 	data.then((value) => {
 		const jsonContent = JSON.stringify(value);
 
-		fs.writeFile("./menus.json", jsonContent, 'utf8', function (err) {
+		fs.writeFile("./lunchHR.json", jsonContent, 'utf8', function (err) {
 			if (err) {
 				return console.log(err);
 			}
 
 			console.log("The file was saved!");
 		}); 
-
-		//Starting the local server
-		// app.listen(3001, () => {
-		// 	console.log('listening on port 3001');
-		// });
 	});
 
 };
+
+getData();

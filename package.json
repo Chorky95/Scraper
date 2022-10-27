@@ -1,14 +1,17 @@
 {
+  "name": "restaurant-menu-scraper",
+  "version": "1.0.0",
+  "description": "",
+  "license": "MIT",
+  "author": "Ivan Ćorković <ivan.corkovic.5@gmail.com>",
   "dependencies": {
     "@netlify/functions": "^1.3.0",
-    "child-process": "^1.0.2",
     "chrome-aws-lambda": "^10.1.0",
-    "node-fetch": "^3.2.10",
+    "dotenv": "^16.0.3",
     "puppeteer-core": "^10.1.0"
   },
-  "type": "module",
   "scripts": {
-    "build": "node express/server.js"
+    "build": "node menus/lunchHrMenus.js"
   },
   "devDependencies": {
     "puppeteer": "^10.1.0"
