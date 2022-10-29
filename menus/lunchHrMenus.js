@@ -20,25 +20,20 @@ function getData() {
 
 		let data = await page.evaluate(() => {
 			
-			// WIP
 			let today = new Date();
 
-			function getNextWorkDay(date) {
-				let day = date.getDay(), add = 1;
-				if (day === 5) add = 3;
-				else if (day === 6) add = 2;
-				date.setDate(date.getDate() + add);
-				
-				return date;
-			};	
+			let dayNumber = document.body.querySelectorAll('div[class^="CalendarButton-module"]')[3];
 			
 			function formatDate(date) {
-				let dd = String(date.getDate()).padStart(2, '0');
-				let mm = String(date.getMonth() + 1).padStart(2, '0');
 				let yyyy = date.getFullYear();
-
+				
+				let dd = dayNumber.innerHTML.padStart(2, '0');
+				let mm = dayNumber.innerHTML < date.getDate() ? String(date.getMonth() + 2).padStart(2, '0') : String(date.getMonth() + 1).padStart(2, '0');
+				
 				return dd + '.' + mm + '.' + yyyy + '.';
 			}
+
+			
 
 			let data = [];
 
@@ -125,10 +120,15 @@ function getData() {
 				if(i < 5) {
 					dateButton.dispatchEvent(clickEvent);
 				}
-
-				getNextWorkDay(today);
 			}
-			//console.log(data);
+
+			data = data.filter((day, index, self) => 
+				index === self.findIndex((t) => (
+					t.date === day.date
+				))
+			)
+
+		//	console.log(data);
 			
 			return data;
 		});
@@ -136,7 +136,6 @@ function getData() {
 		// logging 
 		await browser.close();
 		
-
 		return data;
 	})();
 
