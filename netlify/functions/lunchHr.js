@@ -1,3 +1,5 @@
+// TESTING: currently not working in production, only locally because of some Netlify serverless function errors.
+
 const chromium = require('chrome-aws-lambda');
 
 exports.handler = async () => {

@@ -1,8 +1,4 @@
 # Scraper
 Web Scraper w/puppeteer
 
-First:
-npm install
-
-To run:
-node src
+Documentation is a work in progress, planned moving this project to NextJS.
