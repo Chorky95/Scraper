@@ -5,7 +5,7 @@ const BUILD_HOOK = "https://api.netlify.com/build_hooks/63550d353255bf5920840f06
 
 console.log('Starting scheduled deployment...')
 
-const handler = schedule('0,30 3-23 * * *', async () => {
+const handler = schedule('0 4-23 * * *', async () => {
     await fetch(BUILD_HOOK, {
         method: 'POST'
       }).then((response) => {
