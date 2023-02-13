@@ -9,7 +9,7 @@ function getData() {
 			args: ['--no-sandbox', "--disabled-setupid-sandbox"],
 			defaultViewport: null,
 			executablePath: await chromium.executablePath,
-			headless: true,
+			headless: false,
 			ignoreHTTPSErrors: true,
 			ignoreDefaultArgs: ['--disable-extensions']
 
@@ -53,6 +53,11 @@ function getData() {
 				let foodTitles = [];
 				let images = [];
 				let menuItems = {};
+				let descriptions = [];
+				let alcohol = [];
+				let cold = [];
+				let spicy = [];
+				let vege = [];
 				let menus = ['A', 'B', 'C', 'D', 'E'];
 				let allMenus = [];
 
@@ -89,6 +94,27 @@ function getData() {
 						url = style.backgroundImage.slice(4, -1).replace(/"/g, "");
 						images.push(url);
 					});
+
+					let details = document.querySelectorAll('div[class^="DailyLunchAbout-module"]');
+
+					let foodDescription = details[0].innerText;
+
+					let alcoholFlag = false;
+					let coldFlag = false;
+					let spicyFlag = false;
+					let vegeFlag = false;
+
+					descriptions.push(foodDescription);
+
+					if(details[1].innerText.includes('Sadrži alkohol')) alcoholFlag = true;
+					if(details[1].innerText.includes('Posluženo hladno')) coldFlag = true;
+					if(details[1].innerText.includes('Blago ljuto')) spicyFlag = true;
+					if(details[1].innerText.includes('Vegetarijanski obrok')) vegeFlag = true;
+
+					alcohol.push(alcoholFlag);
+					cold.push(coldFlag);
+					spicy.push(spicyFlag);
+					vege.push(vegeFlag);
 				});
 
 				images = removeDuplicates(images);
@@ -99,7 +125,12 @@ function getData() {
 					menuItems = {
 						menu: menus[i],
 						title: foodTitles[i],
-						image: images[i]
+						image: images[i],
+						description: descriptions[i],
+						alcoholTag: alcohol[i],
+						servedColdTag: cold[i],
+						spicyTag: spicy[i],
+						vegeTag: vege[i]
 					}
 
 					allMenus.push(menuItems);
