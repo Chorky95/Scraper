@@ -9,7 +9,7 @@ function getData() {
 			args: ['--no-sandbox', "--disabled-setupid-sandbox"],
 			defaultViewport: null,
 			executablePath: await chromium.executablePath,
-			headless: false,
+			headless: true,
 			ignoreHTTPSErrors: true,
 			ignoreDefaultArgs: ['--disable-extensions']
 
