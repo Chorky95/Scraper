@@ -33,8 +33,6 @@ function getData() {
 				return dd + '.' + mm + '.' + yyyy + '.';
 			}
 
-			
-
 			let data = [];
 
 			let dateButton = document.body.querySelectorAll('svg[class^="CalendarButton-module"]')[1];
@@ -46,7 +44,11 @@ function getData() {
 			function removeDuplicates(arr) {
 				return arr.filter((item,
 					index) => arr.indexOf(item) === index);
-			}
+			};
+
+			function stringSentenceCase(str) {
+				return str.replace(/\.\s+([a-z])[^\.]|^(\s*[a-z])[^\.]/g, s => s.replace(/([a-z])/,s => s.toUpperCase()))
+			};
 
 			function getFoods() {
 				let buttons = document.querySelectorAll('div[class^="LunchButton-module"]');
@@ -61,6 +63,7 @@ function getData() {
 				let menus = ['A', 'B', 'C', 'D', 'E'];
 				let allMenus = [];
 				let calories = [];
+				let sideDish = [];
 
 				buttons.forEach(button => {
 					button.click();
@@ -80,6 +83,16 @@ function getData() {
 					});
 					
 					foodTitles.push(...filteredTitles);
+
+					let sideDishes = document.querySelectorAll('div[class^="DailyLunchHero-module"] p span[class^="DailyLunchHero-module"]');
+
+					let sideDishesNames = [];
+
+					sideDishes.forEach(element => {
+						sideDishesNames.push(stringSentenceCase(element.innerText.toLowerCase()));
+					});
+
+					sideDish.push(sideDishesNames);
 
 					let imageElements = document.body.querySelectorAll('div[class^="DailyLunchHero-module"]');
 
@@ -135,7 +148,8 @@ function getData() {
 						servedColdTag: cold[i],
 						spicyTag: spicy[i],
 						vegeTag: vege[i],
-						calories: calories[i]
+						calories: calories[i],
+						sideDishes: sideDish[i]
 					}
 
 					allMenus.push(menuItems);
