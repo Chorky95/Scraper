@@ -60,6 +60,7 @@ function getData() {
 				let vege = [];
 				let menus = ['A', 'B', 'C', 'D', 'E'];
 				let allMenus = [];
+				let calories = [];
 
 				buttons.forEach(button => {
 					button.click();
@@ -115,6 +116,9 @@ function getData() {
 					cold.push(coldFlag);
 					spicy.push(spicyFlag);
 					vege.push(vegeFlag);
+
+					let caloriesCount = document.querySelectorAll(`div[class^="DailyLunchCaloriesInfo-module"] h1`);
+					calories.push(caloriesCount[0].innerText);
 				});
 
 				images = removeDuplicates(images);
@@ -130,7 +134,8 @@ function getData() {
 						alcoholTag: alcohol[i],
 						servedColdTag: cold[i],
 						spicyTag: spicy[i],
-						vegeTag: vege[i]
+						vegeTag: vege[i],
+						calories: calories[i]
 					}
 
 					allMenus.push(menuItems);
@@ -159,7 +164,7 @@ function getData() {
 				))
 			)
 
-		//	console.log(data);
+			//console.log(data);
 			
 			return data;
 		});
